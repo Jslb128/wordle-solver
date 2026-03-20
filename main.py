@@ -1,9 +1,13 @@
 from words import words
 
 def remove(let):
+    wordsToRmv = []
     for word in words:
         if let in word:
-            words.remove(word)
+            wordsToRmv.append(word)
+    for rmv in wordsToRmv:
+        words.remove(rmv)
+
 
 def searchAt(let,pos):
     gWords = []
