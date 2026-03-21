@@ -1,13 +1,12 @@
 from words import words
 
-# remove words that have a letter
-def remove(let, arr):
-    wordsToRmv = []
-    for word in arr:
-        if let in word:
-            wordsToRmv.append(word)
-    for rmv in wordsToRmv:
-        arr.remove(rmv)
+# return words that dont have a letter
+def fltrBlack(let):
+    bWords = []
+    for word in words:
+        if not(let in word):
+            bWords.append(word)
+    return bWords
 
 # return words that have a letter at that position
 def fltrGreen(let,pos):
@@ -40,14 +39,15 @@ def fltrDYellow(let):
 
 count = 0
 
-result = "_"
+result = "bybyg"
 guess = "stale"
 
-print("guess:\t", guess)
 while result != "ggggg":
+    print("Guess:\t", guess)
     result = input("result: ")
     #filter words
     green = []
+    yellow = []
     for i in result:
         letter = guess[count]
         if i == "g":
@@ -59,20 +59,17 @@ while result != "ggggg":
         letter = guess[count]
         if i == "y":
             words = fltrYellow(letter, count)
+            yellow.append(letter)
         if i == "y" and letter in green:# if there are two of the same letter in this word
             words = fltrDYellow(letter)
         count+=1
     count = 0
     for i in result:
         letter = guess[count]
-        if i == "b" and not(letter in green):# if this is not a repeated letter in guess word
-            remove(letter,words)
+        if i == "b" and not(letter in green or letter in yellow):# if this is not a repeated letter in guess word
+            words = fltrBlack(letter)
         count+=1
     count = 0
-
     guess = words[0]
     possWords = len(words)
-
     print("possible words:", possWords)
-
-    print("guess:\t", guess)
