@@ -39,12 +39,16 @@ def fltrDYellow(let):
 
 count = 0
 
-result = "bybyg"
+result = ""
 guess = "stale"
+possWords = len(words)
 
-while result != "ggggg":
-    print("Guess:\t", guess)
-    result = input("result: ")
+while possWords > 0:
+    print("_____________________________")
+    print("Possible words :", possWords)
+    print("Guess  :", guess)
+    result = input("Result : ")
+
     #filter words
     green = []
     yellow = []
@@ -70,6 +74,9 @@ while result != "ggggg":
             words = fltrBlack(letter)
         count+=1
     count = 0
-    guess = words[0]
     possWords = len(words)
-    print("possible words:", possWords)
+    try:
+        guess = words[0]
+        words.remove(guess)
+    except:
+        print("\nAnswer :", guess)
