@@ -1,0 +1,6 @@
+# stale > notch 
+INPUT bybbb
+INPUT ybgbb
+# ensure code filters out double 'O's and double 'O' words are not output
+FAIL - returned outdo as second guess and motor as third guess 
+PASS - returned outdo as second guess and notch as third guess
