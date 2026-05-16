@@ -1,4 +1,5 @@
-from words import words
+from words import words, letterFreq
+from bestWord import getGuess
 
 # return words that dont have a letter
 def fltrBlack(searchLetter):
@@ -26,7 +27,7 @@ def fltrYellow(let, pos):
     return newWords
 
 # return words with two or more letters
-def fltrDLetters(searchLetter, mode):
+def fltrDLetters(searchLetter, mode, limit):
     newWords = []
     for word in words:
         Dletters = 0
@@ -37,13 +38,13 @@ def fltrDLetters(searchLetter, mode):
      	    if Dletters > 1:# if there are two same letters
                 newWords.append(word)
         elif mode == "rmv":
-            if Dletters < 2:
+            if Dletters < limit:
                 newWords.append(word)
 
     return newWords
 
 result = ""
-guess = "stale"
+guess = getGuess(words, letterFreq)
 possWords = len(words)
 
 while possWords > 0:
@@ -60,13 +61,13 @@ while possWords > 0:
         letter = guess[i]
         if result[i] == "g":
             words = fltrGreen(letter, i)
-            lettersInWord.append(letter)
+            lettersInWord.append(letter)#
 
     for i in range(0,len(result)):# loop for yellows
         letter = guess[i]
 
         if result[i] == "y" and letter in lettersInWord:# if there are two of the same letter in this word
-            words = fltrDLetters(letter, "add")
+            words = fltrDLetters(letter, "add", 0)
         if result[i] == "y":
             words = fltrYellow(letter, i)
             lettersInWord.append(letter)
@@ -75,12 +76,14 @@ while possWords > 0:
         letter = guess[i]
         if result[i] == "b" and not(letter in lettersInWord):# if this is not a repeated letter in guess word
             words = fltrBlack(letter)
-        if result[i] == "b" and letter in lettersInWord:
-            words = fltrDLetters(letter, "rmv")
-            print("ran fltrDblack")
+        if result[i] == "b" and (lettersInWord.count(letter) > 1): # if this is a repeated letter in guess word
+            words = fltrDLetters(letter, "rmv", lettersInWord.count(letter)+1)
+            print("filter for single", letter)  
+
     possWords = len(words)
     try:
-        guess = words[0]
+        chk = words[0]# check if there are any words left to guess
+        guess = getGuess(words, letterFreq)
         words.remove(guess)
     except:
         print("\nAnswer :", guess)
