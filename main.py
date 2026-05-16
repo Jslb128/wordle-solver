@@ -77,7 +77,7 @@ while possWords > 0:
         if result[i] == "b" and not(letter in lettersInWord):# if this is not a repeated letter in guess word
             words = fltrBlack(letter)
         if result[i] == "b" and (lettersInWord.count(letter) > 1): # if this is a repeated letter in guess word
-            words = fltrDLetters(letter, "rmv", lettersInWord.count(letter)+1)
+            words = fltrDLetters(letter, "rmv", lettersInWord.count(letter)+1)# remove words with more than the amount of repeated letters in guess word
             print("filter for single", letter)  
 
     possWords = len(words)
