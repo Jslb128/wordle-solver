@@ -82,7 +82,15 @@ while possWords > 0:
 
     possWords = len(words)
     try:
-        chk = words[0]# check if there are any words left to guess
+        #recalculate letter frequencies
+        letterFreq = {"a":0,"b":0,"c":0,"d":0,"e":0,"f":0,"g":0,"h":0,"i":0,"j":0,"k":0,"l":0,"m":0,"n":0,"o":0,"p":0,"q":0,"r":0,"s":0,"t":0,"u":0,"v":0,"w":0,"x":0,"y":0,"z":0}
+        for word in words:
+            for letter in word:
+                letterFreq[letter]+=1
+        # percentage calculation
+        total = possWords*5
+        for letter, occurence in letterFreq.items():
+            letterFreq[letter] = occurence/total*100
         guess = getGuess(words, letterFreq)
         words.remove(guess)
     except:

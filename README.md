@@ -10,5 +10,6 @@ A CLI program that filters out possible answers for a wordle game and returns th
 
  ## How it works
  Based on results it filters for possible words.
- Finds the best word in possbile words by looping through each word, and giving them a score; word with most common letters will rank higher and repeated letters get no points. 
+ Finds the best word in possbile words by looping through each word, and giving them a score; word with most common letters will rank higher and repeated letters get no points.
+ It will recalculate letter frequencies every turn
  
