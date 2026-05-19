@@ -34,12 +34,10 @@ def fltrDLetters(searchLetter, mode, limit):
         for letter in word: # loop through the letters in word
             if letter == searchLetter:
                 Dletters+=1
-        if mode == "add":
-     	    if Dletters > 1:# if there are two same letters
-                newWords.append(word)
-        elif mode == "rmv":
-            if Dletters < limit:
-                newWords.append(word)
+        if mode == "add" and Dletters > 1: # if there are two of the same letter
+            newWords.append(word)
+        elif mode == "rmv" and Dletters < limit:
+            newWords.append(word)
 
     return newWords
 
@@ -54,8 +52,6 @@ while possWords > 0:
     result = input("Result : ")
 
     #filter words
-    green = []
-    yellow = []
     lettersInWord = []
     for i in range(0,len(result)):
         letter = guess[i]
@@ -68,6 +64,7 @@ while possWords > 0:
 
         if result[i] == "y" and letter in lettersInWord:# if there are two of the same letter in this word
             words = fltrDLetters(letter, "add", 0)
+            print("filter for double", letter)
         if result[i] == "y":
             words = fltrYellow(letter, i)
             lettersInWord.append(letter)
@@ -89,8 +86,8 @@ while possWords > 0:
                 letterFreq[letter]+=1
         # percentage calculation
         total = possWords*5
-        for letter, occurence in letterFreq.items():
-            letterFreq[letter] = occurence/total*100
+        for letter in letterFreq:
+            letterFreq[letter] = letterFreq[letter]/total*100
         guess = getGuess(words, letterFreq)
         words.remove(guess)
     except:

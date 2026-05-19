@@ -9,7 +9,7 @@ def getGuess(words, letterFreq):
         repeated = ""
         for letter in word:
             if not(letter in repeated): # skip repeated letters in word
-                points = points + letterFreq[letter] #
+                points += letterFreq[letter] #
                 repeated += letter
         leaderboard.append(points) # add points to leaderboard
 
