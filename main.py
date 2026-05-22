@@ -1,4 +1,4 @@
-from words import words, letterFreq
+from words import words
 from bestWord import getGuess
 
 # return words that dont have a letter
@@ -42,7 +42,7 @@ def fltrDLetters(searchLetter, mode, limit):
     return newWords
 
 result = ""
-guess = getGuess(words, letterFreq)
+guess = getGuess(words)
 possWords = len(words)
 
 while possWords > 0:
@@ -79,16 +79,7 @@ while possWords > 0:
 
     possWords = len(words)
     try:
-        #recalculate letter frequencies
-        letterFreq = {"a":0,"b":0,"c":0,"d":0,"e":0,"f":0,"g":0,"h":0,"i":0,"j":0,"k":0,"l":0,"m":0,"n":0,"o":0,"p":0,"q":0,"r":0,"s":0,"t":0,"u":0,"v":0,"w":0,"x":0,"y":0,"z":0}
-        for word in words:
-            for letter in word:
-                letterFreq[letter]+=1
-        # percentage calculation
-        total = possWords*5
-        for letter in letterFreq:
-            letterFreq[letter] = letterFreq[letter]/total*100
-        guess = getGuess(words, letterFreq)
+        guess = getGuess(words)
         words.remove(guess)
     except:
         print("\nAnswer :", guess)
